@@ -1,54 +1,126 @@
-# React + TypeScript + Vite
+# XCAPITALPROJ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Breve descripción de tu aplicación.
 
-Currently, two official plugins are available:
+## Tecnologías Usadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Vite](https://vitejs.dev/)
+- [React](https://react.dev/)
+- [Zustand](https://zustand-demo.pmnd.rs/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Zod](https://zod.dev/)
+- [ShadCN](https://ui.shadcn.com/docs/installation)
+- [ReactHookForm](https://react-hook-form.com/)
 
-## Expanding the ESLint configuration
+## Estructura del proyecto
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+XCAPITALPROJ
+├── 📂 node_modules # Dependencias del proyecto (autogenerado)
+├── 📂 public # Archivos estáticos públicos
+├── 📂 src # Código fuente principal
+│ ├── 📂 @types # Definiciones de tipos TypeScript
+│ ├── 📂 assets # Recursos (imágenes, fuentes, etc.)
+│ ├── 📂 components # Componentes reutilizables
+│ ├── 📂 lib # Lógica y utilidades compartidas
+│ ├── 📂 store # Estado global con Zustand
+│ ├── 📂 views # Vistas o páginas de la aplicación
+│ ├── App.tsx # Componente raíz de la aplicación
+│ ├── index.css # Estilos globales
+│ ├── main.tsx # Punto de entrada principal
+│ ├── vite-env.d.ts # Definiciones de entorno de Vite
+├── 📜 .gitignore # Archivos y carpetas a ignorar en Git
+├── 📜 components.json # Posible configuración de componentes
+├── 📜 eslint.config.js # Configuración de ESLint
+├── 📜 index.html # Archivo HTML principal
+├── 📜 package-lock.json # Control de versiones de dependencias (npm)
+├── 📜 package.json # Archivo de configuración del proyecto
+├── 📜 README.md # Documentación del proyecto
+├── 📜 tsconfig.app.json # Configuración específica de TypeScript para la app
+├── 📜 tsconfig.json # Configuración global de TypeScript
+├── 📜 tsconfig.node.json # Configuración TypeScript para Node.js
+└── 📜 vite.config.ts # Configuración de Vite
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Instalación
+
+npm install
+
+# o si usas yarn
+
+yarn install
+
+# o si usas pnpm
+
+pnpm install
+
+## Resúmen del proyecto
+
+El proyecto consiste en dos tablas con registros de personas y ciertos
+datos fiscales. Las tablas se encuentran en IndividualsTable.tsx para
+personas físicas y, LegalEntitiesTable.tsx para personas morales.
+
+```typescript
+//Componente para crear tablas.
+const DataTable = <T>({ data, columns }: DataTableProps<T>) => {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow className="grid grid-cols-4">
+          {columns.map((head) => (
+            <TableHead className="text-center" key={head.key as string}>
+              {head.label}
+            </TableHead>
+          ))}
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {data.map((row, rowIndex) => (
+          <TableRow key={`row-${rowIndex}-${row}`} className="grid grid-cols-4">
+            {columns.map((col) => (
+              <TableCell
+                key={`row-${col.key as string}`}
+                className="text-center"
+              >
+                {col.render
+                  ? col.render(row[col.key])
+                  : (row[col.key] as React.ReactNode)}
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+};
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Estos registros se realizan, dando click en el boton
+de "añadir usuario". Así se muestra un modal con un
+formulario que nos pide ingresar un RFC. Esto se enc-
+entra en el archivo RegistrationDialog.tsx
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```typescript
+const RegistrationDialog = () => {
+  const { isOpen, handleModalOpen } = usePersonInfo();
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+  return (
+    <>
+      <Dialog open={isOpen} onOpenChange={handleModalOpen}>
+        <DialogClose />
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Registrar persona fiscal</DialogTitle>
+          </DialogHeader>
+          <RegistrationForm />
+          <SuccessView />
+        </DialogContent>
+      </Dialog>
+      <Button onClick={handleModalOpen}>Add Person</Button>
+    </>
+  );
+};
 ```
+
+El formulario identifica y registra a las personas fisicas
+y morales según las validaciones que contiene. Las validaciones
+fueron hechas con zod.

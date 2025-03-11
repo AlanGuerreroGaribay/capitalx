@@ -59,7 +59,7 @@ export const personregisterSchema = z
       return validarRFC(data.rfc, data);
     },
     {
-      message: "El RFC ingresado no coincide con los datos personales.",
+      message: "El RFC ingresado no coincide con los del formulario.",
       path: ["rfc"],
     }
   )
