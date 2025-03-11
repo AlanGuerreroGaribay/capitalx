@@ -50,6 +50,13 @@ npm install
 
 ```
 
+## Ejecución
+
+```
+npm run dev
+
+```
+
 ## Resúmen del proyecto
 
 El proyecto consiste en dos tablas con registros de personas y ciertos

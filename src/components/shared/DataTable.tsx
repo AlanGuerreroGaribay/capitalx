@@ -16,13 +16,14 @@ export interface Column<T> {
 type DataTableProps<T> = {
   data: T[];
   columns: Column<T>[];
+  classNameRow: string;
 };
 
-const DataTable = <T,>({ data, columns }: DataTableProps<T>) => {
+const DataTable = <T,>({ data, columns, classNameRow }: DataTableProps<T>) => {
   return (
     <Table>
       <TableHeader>
-        <TableRow className="grid grid-cols-4">
+        <TableRow className={classNameRow}>
           {columns.map((head) => (
             <TableHead className="text-center" key={head.key as string}>
               {head.label}
@@ -32,7 +33,7 @@ const DataTable = <T,>({ data, columns }: DataTableProps<T>) => {
       </TableHeader>
       <TableBody>
         {data.map((row, rowIndex) => (
-          <TableRow key={`row-${rowIndex}-${row}`} className="grid grid-cols-4">
+          <TableRow key={`row-${rowIndex}-${row}`} className={classNameRow}>
             {columns.map((col) => (
               <TableCell
                 key={`row-${col.key as string}`}

@@ -13,7 +13,11 @@ const LegalEntitiesTable = () => {
   return (
     <Card className="w-full">
       <h2 className="mx-4">Personas Morales</h2>
-      <DataTable data={legalEntities} columns={columnsLegalEntity} />
+      <DataTable
+        classNameRow="grid grid-cols-5"
+        data={legalEntities}
+        columns={columnsLegalEntity}
+      />
     </Card>
   );
 };

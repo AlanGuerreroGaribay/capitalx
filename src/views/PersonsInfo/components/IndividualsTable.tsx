@@ -13,7 +13,7 @@ const IndividualsTable = () => {
   return (
     <Card className="w-full">
       <h2 className="mx-4">Personas Físicas</h2>
-      <DataTable data={individuals} columns={columnsIndivdualPerson} />
+      <DataTable classNameRow="grid grid-cols-5" data={individuals} columns={columnsIndivdualPerson} />
     </Card>
   );
 };

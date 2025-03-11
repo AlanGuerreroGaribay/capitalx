@@ -1,5 +1,7 @@
 import { Person } from "@/@types/person.type";
 import { Column } from "@/components/shared/DataTable";
+import { Button } from "@/components/ui";
+import { usePersonStore } from "@/store/personStore";
 
 export const columnsIndivdualPerson: Column<Person>[] = [
   {
@@ -30,6 +32,24 @@ export const columnsIndivdualPerson: Column<Person>[] = [
       return <div>{row}</div>;
     },
   },
+  {
+    key: "rfc",
+    label: "Opciones",
+    render: (row) => {
+      const { deleteUser } = usePersonStore();
+      return (
+        <div>
+          <Button
+            onClick={() => {
+              deleteUser(row || "");
+            }}
+          >
+            Eliminar
+          </Button>
+        </div>
+      );
+    },
+  },
 ];
 
 export const columnsLegalEntity: Column<Person>[] = [
@@ -55,5 +75,23 @@ export const columnsLegalEntity: Column<Person>[] = [
     key: "giro",
     label: "Giro",
     render: (row) => <div>{row}</div>,
+  },
+  {
+    key: "rfc",
+    label: "Opciones",
+    render: (row) => {
+      const { deleteUser } = usePersonStore();
+      return (
+        <div>
+          <Button
+            onClick={() => {
+              deleteUser(row || "");
+            }}
+          >
+            Eliminar
+          </Button>
+        </div>
+      );
+    },
   },
 ];
