@@ -45,15 +45,10 @@ XCAPITALPROJ
 
 ## Instalación
 
+```
 npm install
 
-# o si usas yarn
-
-yarn install
-
-# o si usas pnpm
-
-pnpm install
+```
 
 ## Resúmen del proyecto
 
