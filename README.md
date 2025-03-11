@@ -15,6 +15,7 @@ Breve descripción de tu aplicación.
 
 ## Estructura del proyecto
 
+```
 XCAPITALPROJ
 ├── 📂 node_modules # Dependencias del proyecto (autogenerado)
 ├── 📂 public # Archivos estáticos públicos
@@ -40,6 +41,7 @@ XCAPITALPROJ
 ├── 📜 tsconfig.json # Configuración global de TypeScript
 ├── 📜 tsconfig.node.json # Configuración TypeScript para Node.js
 └── 📜 vite.config.ts # Configuración de Vite
+```
 
 ## Instalación
 
